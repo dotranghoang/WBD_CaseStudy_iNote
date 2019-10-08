@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Type</title>
+</head>
+<body>
+<center>
+    <h1 class="title">Create New Type Note</h1>
+    <p><a href="/view-type">Back to list type</a></p>
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+
+    <form th:action="@{/save-type-note}" th:object="${typeNote}" method="post">
+        <table>
+            <tr>
+                <td>Type</td>
+            </tr>
+            <tr>
+                <td><textarea rows="2" cols="50" type="text" th:field="*{name}"/></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+            </tr>
+            <tr>
+                <td><textarea rows="10" cols="50" th:field="*{description}"></textarea></td>
+            </tr>
+            <tr>
+                <td><button type="submit" style="width: 20%; height: 20%;">Create</button></td>
+            </tr>
+        </table>
+    </form>
+</center>
+</body>
+</html>
