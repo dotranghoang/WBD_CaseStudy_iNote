@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class TypeNoteController {
 
@@ -83,6 +85,13 @@ public class TypeNoteController {
 
     @PostMapping("/delete-type-note")
     public String deleteTypeNote(@ModelAttribute TypeNote typeNote){
+
+
+        List<Note> notes = (List<Note>) noteService.findAllByTypeNote(typeNote);
+        for (Note note: notes){
+            noteService.remove(note.getId());
+        }
+
         typeNoteService.remove(typeNote.getId());
 
         return "redirect:view-type";
