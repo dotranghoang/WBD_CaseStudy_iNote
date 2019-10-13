@@ -20,6 +20,11 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
+    public Iterable<Note> findAll() {
+        return noteRepository.findAll();
+    }
+
+    @Override
     public Note findById(Long id) {
         return noteRepository.findOne(id);
     }
@@ -43,5 +48,10 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public Page<Note> findAllByTitleContaining(String title, Pageable pageable) {
         return noteRepository.findAllByTitleContaining(title,pageable);
+    }
+
+    @Override
+    public Iterable<Note> findAllByTypeNote(TypeNote typeNote) {
+        return noteRepository.findAllByTypeNote(typeNote);
     }
 }

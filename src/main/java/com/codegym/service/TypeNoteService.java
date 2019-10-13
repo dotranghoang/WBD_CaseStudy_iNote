@@ -9,5 +9,5 @@ public interface TypeNoteService {
 
     void remove(Long id);
 
-    void save(TypeNote typeNote);
+    TypeNote save(TypeNote typeNote);
 }

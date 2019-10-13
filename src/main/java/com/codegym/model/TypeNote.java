@@ -15,7 +15,7 @@ public class TypeNote {
     @Lob
     private String description;
 
-    @OneToMany(targetEntity = Note.class)
+    @OneToMany(targetEntity = Note.class,fetch = FetchType.EAGER)
     private List<Note> Notes;
 
     public List<Note> getNotes() {

@@ -26,7 +26,8 @@ public class TypeNoteServiceImpl implements TypeNoteService {
     }
 
     @Override
-    public void save(TypeNote typeNote) {
+    public TypeNote save(TypeNote typeNote) {
         typeNoteRepository.save(typeNote);
+        return typeNote;
     }
 }
