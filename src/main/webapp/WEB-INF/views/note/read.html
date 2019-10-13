@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
+    <meta charset="UTF-8">
+    <title>Detail Note</title>
+</head>
+<body>
+<center>
+    <a href="/view-note">List Note</a>
+    <hr/>
+    <table>
+        <tr>
+            <td>Title</td>
+        </tr>
+        <tr>
+            <td><textarea rows="4" cols="50" type="read" th:text="${note.title}"/></td>
+        </tr>
+        <tr>
+            <td>Content</td>
+        </tr>
+        <tr>
+            <td><textarea rows="15" cols="60" type="read" th:text="${note.content}"></textarea></td>
+        </tr>
+    </table>
+    <p>
+        <a th:href="@{/edit-note/__${note.id}__}"  th:text="Edit"></a> ||
+        <a th:href="@{/delete-note/__${note.id}__}"  th:text="Delete"></a>
+    </p>
+</center>
+</body>
+</html>

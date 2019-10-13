@@ -14,6 +14,18 @@ public class Note {
     @Lob
     private String content;
 
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private TypeNote typeNote;
+
+    public TypeNote getTypeNote() {
+        return typeNote;
+    }
+
+    public void setTypeNote(TypeNote typeNote) {
+        this.typeNote = typeNote;
+    }
+
     public Note() {
     }
 

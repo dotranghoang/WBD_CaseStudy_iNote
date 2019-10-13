@@ -7,10 +7,8 @@
 <body>
 <center>
     <h1 class="title">Are You Sure?</h1>
+    <hr/>
     <p><a href="/view-note">Back to list note</a> </p>
-    <th:block th:if="${message}">
-        <p th:text ="${message}">
-    </th:block>
 
     <form th:action="@{/delete-note}" th:object="${note}" method="post">
         <input type="hidden" th:field="*{id}"/>

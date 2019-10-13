@@ -1,6 +1,7 @@
 package com.codegym.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "type")
@@ -13,6 +14,17 @@ public class TypeNote {
 
     @Lob
     private String description;
+
+    @OneToMany(targetEntity = Note.class)
+    private List<Note> Notes;
+
+    public List<Note> getNotes() {
+        return Notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        Notes = notes;
+    }
 
     public TypeNote() {
     }

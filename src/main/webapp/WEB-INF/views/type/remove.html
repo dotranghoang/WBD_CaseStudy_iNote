@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Delete Type Note</title>
 </head>
 <body>
-
+<center>
+    <h1>Are You Sure?</h1>
+    <hr/>
+    <form th:action="@{/delete-type-note}" th:object="${typeNote}" method="post">
+    <table border="1">
+        <tr>
+            <td>Type</td>
+            <input type="hidden" th:field="*{id}"/>
+        </tr>
+        <tr>
+            <td><textarea rows="2" cols="50"  th:text="${typeNote.name}"></textarea>
+        </tr>
+        <tr>
+            <td>Description</td>
+        </tr>
+        <tr>
+            <td><textarea rows="10" cols="50" th:text="${typeNote.description}"></textarea></td>
+        </tr>
+        <tr>
+            <td><button type="submit" style="width: 20%; height: 20%;">Delete</button></td>
+        </tr>
+    </table>
+    </form>
+</center>
 </body>
 </html>

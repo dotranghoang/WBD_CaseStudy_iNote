@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit</title>
 </head>
 <body>
+<center>
+<h1 class="title">Edit Type Note</h1>
+<hr/>
+    <a href="/view-type">Back to list Type Note</a>
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+<form th:action="@{/update-type-note}" th:object="${typeNote}" method="post">
+    <table border="1">
 
+        <tr>
+            <input type="hidden" th:field="*{id}"/>
+            <td>Type</td>
+        </tr>
+        <tr>
+            <td><textarea rows="2" cols="50"  th:field="*{name}"></textarea>
+        </tr>
+        <tr>
+            <td>Description</td>
+        </tr>
+        <tr>
+            <td><textarea rows="10" cols="50" th:field="*{description}"></textarea></td>
+        </tr>
+        <tr>
+            <td><button type="submit" style="width: 20%; height: 20%;">Update</button></td>
+        </tr>
+    </table>
+</form>
+</center>
 </body>
 </html>

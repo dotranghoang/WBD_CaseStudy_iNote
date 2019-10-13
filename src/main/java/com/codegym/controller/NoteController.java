@@ -1,23 +1,63 @@
 package com.codegym.controller;
 
 import com.codegym.model.Note;
+import com.codegym.model.TypeNote;
 import com.codegym.service.NoteService;
+import com.codegym.service.TypeNoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller
 public class NoteController {
     @Autowired
     private NoteService noteService;
 
+    @Autowired
+    private TypeNoteService typeNoteService;
+
+    @ModelAttribute("typeNotes")
+    public Iterable<TypeNote> typeNotes(){
+        return typeNoteService.findAll();
+    }
+
     @GetMapping("/view-note")
-    public ModelAndView listAllNote(){
-        Iterable<Note> notes = noteService.findAll();
+    public ModelAndView listAllNote(@RequestParam("s")Optional<String> s,
+                                    @PageableDefault(value = 10,sort = "typeNote")
+                                    Pageable pageable
+                                    ){
+        Page<Note> notes;
+
+        if(s.isPresent()){
+            notes = noteService.findAllByTitleContaining(s.get(),pageable);
+        } else {
+            notes = noteService.findAll(pageable);
+        }
+
+        ModelAndView modelAndView = new ModelAndView("/note/list");
+        modelAndView.addObject("notes",notes);
+
+        return modelAndView;
+    }
+
+    @PostMapping("/view-note")
+    public ModelAndView viewList(@RequestParam(value = "id") Long id,
+                                 @PageableDefault(value = 10,sort = "typeNote")
+                                         Pageable pageable){
+
+        TypeNote typeNote = typeNoteService.findById(id);
+        Page<Note> notes = noteService.findAllByTypeNote(typeNote,pageable);
+
+        if(id == -1) {
+            notes = noteService.findAll(pageable);
+        }
+
         ModelAndView modelAndView = new ModelAndView("/note/list");
         modelAndView.addObject("notes",notes);
 
@@ -79,5 +119,15 @@ public class NoteController {
         noteService.remove(note.getId());
 
         return "redirect:view-note";
+    }
+
+    @GetMapping("read-note/{id}")
+    public ModelAndView readDetailNote(@PathVariable Long id) {
+        Note note = noteService.findById(id);
+
+        ModelAndView modelAndView = new ModelAndView("/note/read");
+        modelAndView.addObject("note",note);
+
+        return modelAndView;
     }
 }

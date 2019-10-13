@@ -17,6 +17,16 @@
         <input type="hidden" th:field="*{id}">
         <table>
             <tr>
+                <td>Type Note</td>
+            </tr>
+            <tr>
+                <td>
+                    <select th:field="*{typeNote}">
+                        <option th:each="typeNote : ${typeNotes}" th:value="${typeNote.id}" th:text="${typeNote.name}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td>Title</td>
             </tr>
             <tr>

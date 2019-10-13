@@ -13,7 +13,17 @@
 </th:block>
 
 <form th:action="@{/save-note}" th:object="${note}" method="post">
-    <table>
+    <table border="1">
+        <tr>
+            <td>Type Note</td>
+        </tr>
+        <tr>
+            <td>
+                <select th:field="*{typeNote}">
+                    <option th:each="typeNote : ${typeNotes}" th:value="${typeNote.id}" th:text="${typeNote.name}"></option>
+                </select>
+            </td>
+        </tr>
         <tr>
         <td>Title</td>
         </tr>

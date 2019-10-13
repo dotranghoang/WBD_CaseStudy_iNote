@@ -5,28 +5,52 @@
     <title>List Note</title>
 </head>
 <body>
+<center>
 <h1 class="title">List Note</h1>
-<p><a href="/create-note">Create New Note</a></p>
-
-<table border="1">
+<p><a href="/create-note">Create New Note </a>||<a href="/view-type"> View All Type Note</a> </p>
+    <form th:action="@{/view-note}" method="post">
+        <select  name="id" >
+            <option th:value="-1">View All Note</option>
+            <option th:each="typeNote : ${typeNotes}" th:value="${typeNote.id}"
+                    th:text="${typeNote.name}">
+            </option>
+        </select>
+        <input type="submit" value="Search">
+    </form>
+    <form>
+            <input name="s" type="text" placeholder="Search by Title">
+            <input type="submit" value="Search">
+    </form>
+<table border="1" width="600">
     <div>
         <tr>
-            <td>Id</td>
+            <td>Serial</td>
             <td>Title</td>
             <td>Type</td>
-            <td>Edit</td>
-            <td>Delete</td>
+            <td>Description</td>
+            <td></td>
         </tr>
-        <div th:each="note : ${notes}">
+        <div th:each="note,state : ${notes}">
             <tr>
-                <td th:text="${note.id}"></td>
+                <td th:text="${state.count}"></td>
                 <td><a th:href="@{/read-note/__${note.id}__}"  th:text="${note.title}"></a></td>
-                <td th:text="1"></td>
-                <td><a th:href="@{/edit-note/__${note.id}__}"  th:text="Edit"></a></td>
-                <td><a th:href="@{/delete-note/__${note.id}__}"  th:text="Delete"></a></td>
+                <td th:text="${note.typeNote.name}"></td>
+                <td th:text="${note.typeNote.description}"></td>
+                <td>
+                    <a th:href="@{/edit-note/__${note.id}__}"  th:text="Edit"></a> ||
+                    <a th:href="@{/delete-note/__${note.id}__}"  th:text="Delete">
+                <td/>
             </tr>
         </div>
     </div>
 </table>
+
+    <div >
+        <a th:href="@{'/view-note'(page=${notes.number - 1})}" th:if="${notes.hasPrevious()}">Previous</a>
+        <span th:text="${notes.number + 1}"></span>/<span th:text="${notes.totalPages}"></span>
+        <a th:href="@{'/view-note'(page=${notes.number + 1})}" th:if="${notes.hasNext()}">Next</a>
+    </div>
+
+</center>
 </body>
 </html>
