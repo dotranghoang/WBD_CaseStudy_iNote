@@ -27,6 +27,11 @@ public class NoteController {
         return typeNoteService.findAll();
     }
 
+    @RequestMapping("/")
+    public String home(){
+        return "redirect:view-note";
+    }
+
     @GetMapping("/view-note")
     public ModelAndView listAllNote(@RequestParam("s")Optional<String> s,
                                     @PageableDefault(value = 10,sort = "typeNote")
