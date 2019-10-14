@@ -5,6 +5,8 @@ import com.codegym.repository.TypeNoteRepository;
 import com.codegym.service.TypeNoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 public class TypeNoteServiceImpl implements TypeNoteService {
 
     @Autowired
@@ -30,4 +32,5 @@ public class TypeNoteServiceImpl implements TypeNoteService {
         typeNoteRepository.save(typeNote);
         return typeNote;
     }
+
 }

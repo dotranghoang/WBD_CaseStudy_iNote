@@ -96,17 +96,4 @@ public class TypeNoteController {
 
         return "redirect:view-type";
     }
-
-//    @GetMapping("/read-type-note/{id}")
-//    public ModelAndView readDetailTypeNote(@PathVariable Long id){
-//        TypeNote typeNote = typeNoteService.findById(id);
-//
-//        Iterable<Note> notes = noteService.findAllByTypeNote(typeNote);
-//
-//        ModelAndView modelAndView = new ModelAndView("/note/list");
-//        modelAndView.addObject("typeNote",typeNote);
-//        modelAndView.addObject("notes",notes);
-//
-//        return modelAndView;
-//    }
 }

@@ -21,4 +21,7 @@ public interface NoteService {
     Page<Note> findAllByTitleContaining(String title, Pageable pageable);
 
     Iterable<Note> findAllByTypeNote(TypeNote typeNote);
+
+    Page<Note> findAllByTypeNoteAndTitleContaining(TypeNote typeNote, String title,Pageable pageable);
+
 }
